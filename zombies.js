@@ -184,28 +184,20 @@ StrongZombie.prototype =Object.create(Zombie.prototype, {
 constructor:FastZombie
 })
 
-/**
- * Class => StrongZombie(health, strength, speed)
- * -----------------------------
- * Creates a strong zombie.
- *
- * The StrongZombie class constructor will call
- *   the super class (Zombie) constructor
- *   while passing in the 3 Zombie constructor params
- *
- * @name StrongZombie
- * @param {number} health           The zombie's health.
- * @param {number} strength         The zombie's strength.
- * @param {number} speed            The zombie's speed.
- */
+function RangedZombie (health,strength,speed) {
+  Zombie.call(this, health, strength, speed)
+}
 
+RangedZombie.prototype =Object.create(Zombie.prototype, {
+constructor:FastZombie
+})
+function ExplodingZombie(health,strength,speed) {
+  Zombie.call(this, health, strength, speed)
+}
 
-/**
- * StrongZombie Extends Zombie Class
- * -----------------------------
- */
-
-
+ExplodingZombie.prototype =Object.create(Zombie.prototype, {
+constructor:FastZombie
+})
 
 /**
  * Class => RangedZombie(health, strength, speed)
