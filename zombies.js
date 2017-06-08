@@ -35,9 +35,79 @@ class Player {
   getPack() {
     return this._pack
   }
+
   getMaxHealth(){
     return this._maxHealth
   }
+
+ takeItem(item){
+   if (this.getPack().length >= 3) {
+  console.log("Pack is full so the item could not be stored.")
+  return false;
+} else {
+  console.log(this.name + " just recieved " + item.name)
+  this.getPack().push(item);
+}
+}
+ discardItem(item){
+   if (this.getPack().indexOf(item) !== -1) {
+    var removed = this.getPack().indexOf(item);
+    this.getPack().splice(removed, 1)
+    console.log(this.name + " just removed " + item.name)
+    return true
+  } else {
+    console.log("You have no items in your pack")
+    return false
+  }
+ }
+ checkPack(){
+    console.log("You curently have" + this.getPack());
+ }
+ equip(itemToEquip){
+   var itemIndex = this._pack.indexOf(itemToEquip);
+ if (itemToEquip instanceof Weapon && itemIndex !== -1){
+   if (this.equipped !== false){
+   this.equipped;
+     this._pack.splice(itemIndex, 1, this.equipped);
+     this.equipped = itemToEquip;
+   } else if (this.equipped === false && itemToEquip instanceof Weapon) {
+       this._pack.splice(itemIndex, 1);
+       this.equipped = itemToEquip;
+   } else {
+       return false;
+   }
+ }
+ }
+ eat(itemToEat){
+   var swapEats = this.getPack().indexOf(itemToEat);
+if (itemToEat instanceof Food && this.getPack().indexOf(itemToEat) !== -1) {
+  this.getPack().splice(swapEats, 1)
+  this.health += itemToEat.energy
+  if (this.health > this._maxHealth) {
+    this.health = this._maxHealth;
+  }
+} else {
+  return false
+}
+ }
+ useItem(item ){
+   if (item instanceof Weapon) {
+       this.equip(item);
+     }
+     if (item instanceof Food) {
+       this.eat(item);
+     } else {
+       return false
+     }
+ }
+ equippedWith(){
+   if (this.equipped !== false) {
+    console.log(this.name + 'is equipped with a ' + this.equipped.name)
+    return this.equipped.name
+  } else {
+    return false
+  }
+ }
 }
 
 
